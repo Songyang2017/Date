@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Date</title>
+	<style>
+		html{
+			height: 100%;
+			background-color: #77C34F;
+		}
+		#app{
+		}
+		p:first-child{
+			margin-top: 10rem;
+		}
+		p{
+			font-size: 1.2rem;
+			color: #fff;
+			width: 100%;
+			text-align: center;
+			
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p>当前时间是：{{now}}</p>
+		<p>再过<input type="text" v-model="num" @blur="ot_fun(num)" @keyup.up="add" @keyup.down="reduce">天是</p>
+		<p>{{num}}</p>
+		<p>{{other}}</p>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script>
+		var app=new Vue({
+			el:"#app",
+			data:{
+				now:null,
+				num:null,
+				other:null
+			},
+			mounted:function(){
+					setInterval(function(){
+						var date=new Date();
+						app.now=date.toLocaleString();
+					},1000);
+					
+				},
+			methods:{
+				add:function(){this.num++},
+				reduce:function(){this.num++},
+				ot_fun:function(s){
+						var date1=new Date();
+						var date2=new Date(date1);
+						console.log(s);
+						date2.setDate(date1.getDate()+s);
+						app.other=date2.getFullYear()+"-"+(date2.getMonth()+1)+"-"+date2.getDate();
+					}
+			}
+		})
+	</script>
+</body>
+</html>
